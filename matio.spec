@@ -70,7 +70,7 @@ Statyczna biblioteka MATIO.
 
 %package fortran
 Summary:	Fortran interface for MATIO library
-Summary(pl.UTF-8):	Interfejs Fortrana do biblioteki MATIO
+Summary(pl.UTF-8):	Interfejs Fortranu do biblioteki MATIO
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -78,11 +78,11 @@ Requires:	%{name} = %{version}-%{release}
 Fortran interface for MATIO library.
 
 %description fortran -l pl.UTF-8
-Interfejs Fortrana do biblioteki MATIO.
+Interfejs Fortranu do biblioteki MATIO.
 
 %package fortran-devel
 Summary:	Header file for Fortran interface for MATIO library
-Summary(pl.UTF-8):	Plik nagłówkowy interfejsu Fortrana do biblioteki MATIO
+Summary(pl.UTF-8):	Plik nagłówkowy interfejsu Fortranu do biblioteki MATIO
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	%{name}-fortran = %{version}-%{release}
@@ -91,11 +91,11 @@ Requires:	%{name}-fortran = %{version}-%{release}
 Header file for Fortran interface for MATIO library.
 
 %description fortran-devel -l pl.UTF-8
-Plik nagłówkowy interfejsu Fortrana do biblioteki MATIO.
+Plik nagłówkowy interfejsu Fortranu do biblioteki MATIO.
 
 %package fortran-static
 Summary:	Fortran interface for MATIO library - static library
-Summary(pl.UTF-8):	Interfejs Fortrana do biblioteki MATIO - biblioteka statyczna
+Summary(pl.UTF-8):	Interfejs Fortranu do biblioteki MATIO - biblioteka statyczna
 Group:		Development/Libraries
 Requires:	%{name}-fortran-devel = %{version}-%{release}
 
@@ -103,7 +103,7 @@ Requires:	%{name}-fortran-devel = %{version}-%{release}
 Fortran interface for MATIO library - static library.
 
 %description fortran-static -l pl.UTF-8
-Interfejs Fortrana do biblioteki MATIO - biblioteka statyczna.
+Interfejs Fortranu do biblioteki MATIO - biblioteka statyczna.
 
 %package apidocs
 Summary:	MATIO API documentation
