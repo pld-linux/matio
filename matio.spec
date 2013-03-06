@@ -1,25 +1,25 @@
 #
 # Conditional build:
-%bcond_without	apidocs		# do not build and package API docs
-%bcond_without	fortran		# Fortran interface
+%bcond_with	apidocs		# build and package API docs (withdrawn in 1.5)
+%bcond_with	fortran		# Fortran interface (removed from 1.5 sources)
+%bcond_without	hdf5		# HDF5-based MAT v7.3 files support
 #
 Summary:	MATIO - Matlab MAT file I/O library
 Summary(pl.UTF-8):	MATIO - biblioteka wejścia/wyjścia do plików MAT (Matlaba)
 Name:		matio
-Version:	1.3.4
+Version:	1.5.0
 Release:	1
-License:	LGPL v2.1+
+License:	BSD
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/matio/%{name}-%{version}.tar.gz
-# Source0-md5:	a91208cf18f2456a5855bc1a9fdb90fd
+# Source0-md5:	42045916d470d038e4141b37bf33ca20
 Patch0:		%{name}-link.patch
-Patch1:		%{name}-ac.patch
-Patch2:		%{name}-separate-fortran.patch
 URL:		http://matio.sourceforge.net/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.8
 %{?with_apidocs:BuildRequires:	doxygen}
 %{?with_fortran:BuildRequires:	gcc-fortran}
+%{?with_hdf5:BuildRequires:	hdf5-devel}
 BuildRequires:	libtool >= 2:1.5
 BuildRequires:	sed >= 4.0
 BuildRequires:	zlib-devel
@@ -29,6 +29,10 @@ BuildRequires:	texlive-format-pdflatex
 BuildRequires:	texlive-latex-ams
 BuildRequires:	texlive-makeindex
 %endif
+Obsoletes:	matio-apidocs
+Obsoletes:	matio-fortran
+Obsoletes:	matio-fortran-devel
+Obsoletes:	matio-fortran-static
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -48,6 +52,7 @@ Summary:	Header files for MATIO library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki MATIO
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+%{?with_hdf5:Requires:	hdf5-devel}
 Requires:	zlib-devel
 
 %description devel
@@ -119,8 +124,6 @@ Dokumentacja API biblioteki MATIO.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
 
 %build
 %{__libtoolize}
@@ -128,23 +131,17 @@ Dokumentacja API biblioteki MATIO.
 %{__autoconf}
 %{__automake}
 %configure \
-	%{?with_apidocs:--enable-docs} \
 	%{?with_fortran:--enable-fortran} \
+	%{!?with_hdf5:--disable-mat73} \
 	--enable-shared
 
-# parallel build is broken (matio.mod, docs)
-%{__make} -j1
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
-
-# keep .la - needed for -fortran
-
-# packaged in -apidocs
-%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/matio
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -154,9 +151,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc ChangeLog NEWS README
+%doc COPYING NEWS README
+%attr(755,root,root) %{_bindir}/matdump
 %attr(755,root,root) %{_libdir}/libmatio.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libmatio.so.0
+%attr(755,root,root) %ghost %{_libdir}/libmatio.so.2
 
 %files devel
 %defattr(644,root,root,755)
@@ -164,6 +162,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmatio.la
 %{_includedir}/matio*.h
 %{_pkgconfigdir}/matio.pc
+%{_mandir}/man3/Mat_*.3*
 
 %files static
 %defattr(644,root,root,755)
@@ -173,7 +172,7 @@ rm -rf $RPM_BUILD_ROOT
 %files fortran
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libmatio-fortran.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libmatio-fortran.so.0
+%attr(755,root,root) %ghost %{_libdir}/libmatio-fortran.so.2
 
 %files fortran-devel
 %defattr(644,root,root,755)
