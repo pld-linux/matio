@@ -7,15 +7,14 @@
 Summary:	MATIO - Matlab MAT file I/O library
 Summary(pl.UTF-8):	MATIO - biblioteka wejścia/wyjścia do plików MAT (Matlaba)
 Name:		matio
-Version:	1.5.2
-Release:	4
+Version:	1.5.8
+Release:	1
 License:	BSD
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/matio/%{name}-%{version}.tar.gz
-# Source0-md5:	85b007b99916c63791f28398f6a4c6f1
-Patch0:		%{name}-link.patch
+# Source0-md5:	350b973e0a47c9525691b050974a7b44
 URL:		http://matio.sourceforge.net/
-BuildRequires:	autoconf >= 2.59
+BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.8
 %{?with_apidocs:BuildRequires:	doxygen}
 %{?with_fortran:BuildRequires:	gcc-fortran}
@@ -123,17 +122,16 @@ Dokumentacja API biblioteki MATIO.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{__libtoolize}
 %{__aclocal} -I config
 %{__autoconf}
+%{__autoheader}
 %{__automake}
 %configure \
 	%{?with_fortran:--enable-fortran} \
-	%{!?with_hdf5:--disable-mat73} \
-	--enable-shared
+	%{!?with_hdf5:--disable-mat73}
 
 %{__make}
 
@@ -151,10 +149,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc COPYING NEWS README
+%doc COPYING NEWS README.md
 %attr(755,root,root) %{_bindir}/matdump
 %attr(755,root,root) %{_libdir}/libmatio.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libmatio.so.2
+%attr(755,root,root) %ghost %{_libdir}/libmatio.so.4
 
 %files devel
 %defattr(644,root,root,755)
