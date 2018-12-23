@@ -7,12 +7,12 @@
 Summary:	MATIO - Matlab MAT file I/O library
 Summary(pl.UTF-8):	MATIO - biblioteka wejścia/wyjścia do plików MAT (Matlaba)
 Name:		matio
-Version:	1.5.8
+Version:	1.5.13
 Release:	1
 License:	BSD
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/matio/%{name}-%{version}.tar.gz
-# Source0-md5:	350b973e0a47c9525691b050974a7b44
+# Source0-md5:	86b3294c64a4fe8be2a8f6a7840f5bf3
 URL:		http://matio.sourceforge.net/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.8
@@ -149,7 +149,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc COPYING NEWS README.md
+%doc COPYING NEWS README
 %attr(755,root,root) %{_bindir}/matdump
 %attr(755,root,root) %{_libdir}/libmatio.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libmatio.so.4
