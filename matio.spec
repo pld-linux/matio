@@ -7,12 +7,12 @@
 Summary:	MATIO - Matlab MAT file I/O library
 Summary(pl.UTF-8):	MATIO - biblioteka wejścia/wyjścia do plików MAT (Matlaba)
 Name:		matio
-Version:	1.5.13
-Release:	2
+Version:	1.5.19
+Release:	1
 License:	BSD
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/matio/%{name}-%{version}.tar.gz
-# Source0-md5:	86b3294c64a4fe8be2a8f6a7840f5bf3
+# Source0-md5:	a77c630fca481f4f533930d406bd9701
 URL:		http://matio.sourceforge.net/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.8
@@ -28,10 +28,10 @@ BuildRequires:	texlive-format-pdflatex
 BuildRequires:	texlive-latex-ams
 BuildRequires:	texlive-makeindex
 %endif
-Obsoletes:	matio-apidocs
-Obsoletes:	matio-fortran
-Obsoletes:	matio-fortran-devel
-Obsoletes:	matio-fortran-static
+Obsoletes:	matio-apidocs < 1.5
+Obsoletes:	matio-fortran < 1.5
+Obsoletes:	matio-fortran-devel < 1.5
+Obsoletes:	matio-fortran-static < 1.5
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -141,6 +141,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libmatio.la
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -152,12 +154,11 @@ rm -rf $RPM_BUILD_ROOT
 %doc COPYING NEWS README
 %attr(755,root,root) %{_bindir}/matdump
 %attr(755,root,root) %{_libdir}/libmatio.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libmatio.so.4
+%attr(755,root,root) %ghost %{_libdir}/libmatio.so.11
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libmatio.so
-%{_libdir}/libmatio.la
 %{_includedir}/matio*.h
 %{_pkgconfigdir}/matio.pc
 %{_mandir}/man3/Mat_*.3*
