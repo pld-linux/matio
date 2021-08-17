@@ -51,7 +51,7 @@ Summary:	Header files for MATIO library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki MATIO
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-%{?with_hdf5:Requires: hdf5-devel}
+%{?with_hdf5:Requires:	hdf5-devel}
 Requires:	zlib-devel
 
 %description devel
