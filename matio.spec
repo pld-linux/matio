@@ -8,17 +8,18 @@ Summary:	MATIO - Matlab MAT file I/O library
 Summary(pl.UTF-8):	MATIO - biblioteka wejścia/wyjścia do plików MAT (Matlaba)
 Name:		matio
 Version:	1.5.27
-Release:	1
+Release:	2
 License:	BSD
 Group:		Libraries
 Source0:	https://downloads.sourceforge.net/matio/%{name}-%{version}.tar.gz
 # Source0-md5:	d9e55f091cbecbe988d4579a51c08776
+Patch0:		%{name}-hdf5.patch
 URL:		https://matio.sourceforge.net/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.8
 %{?with_apidocs:BuildRequires:	doxygen}
 %{?with_fortran:BuildRequires:	gcc-fortran}
-%{?with_hdf5:BuildRequires:	hdf5-devel}
+%{?with_hdf5:BuildRequires:	hdf5-devel >= 1.10}
 BuildRequires:	libtool >= 2:2
 BuildRequires:	sed >= 4.0
 BuildRequires:	zlib-devel
@@ -51,7 +52,7 @@ Summary:	Header files for MATIO library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki MATIO
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-%{?with_hdf5:Requires:	hdf5-devel}
+%{?with_hdf5:Requires:	hdf5-devel >= 1.10}
 Requires:	zlib-devel
 
 %description devel
@@ -122,6 +123,7 @@ Dokumentacja API biblioteki MATIO.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__libtoolize}

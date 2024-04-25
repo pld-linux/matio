@@ -1,0 +1,11 @@
+hdf5.pc is not provided so far (as of hdf 1.10.10)
+--- matio-1.5.27/matio.pc.in.orig	2024-04-20 10:09:17.000000000 +0200
++++ matio-1.5.27/matio.pc.in	2024-04-25 20:08:22.906996972 +0200
+@@ -7,5 +7,6 @@ Name: MATIO
+ Description: MATIO Library
+ Version: @VERSION@
+ Libs: -L${libdir} -lmatio
++Libs.private: @HDF5_LIBS@
+ Cflags: -I${includedir}
+-Requires.private: @HDF5_REQUIRES_PRIVATE@ @ZLIB_REQUIRES_PRIVATE@
++Requires.private: @ZLIB_REQUIRES_PRIVATE@
