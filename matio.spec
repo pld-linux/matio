@@ -8,7 +8,7 @@ Summary:	MATIO - Matlab MAT file I/O library
 Summary(pl.UTF-8):	MATIO - biblioteka wejścia/wyjścia do plików MAT (Matlaba)
 Name:		matio
 Version:	1.5.27
-Release:	2
+Release:	3
 License:	BSD
 Group:		Libraries
 Source0:	https://downloads.sourceforge.net/matio/%{name}-%{version}.tar.gz
